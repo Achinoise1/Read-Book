@@ -1,5 +1,5 @@
-from database import Database_conn as db
-from question import question as q
+import extensions.Database_conn as db
+import extensions.question as q
 import random
 # from webcrawer import douban_webcrawer as dw
 
@@ -72,6 +72,7 @@ class control():
                 except:
                     print(f"error on {filename}, question {i}")
     # 随机出题
+
     def get_question_random(self):
         questions = list(self.database.get_data("question"))
         ans = []
@@ -89,7 +90,8 @@ class control():
 
     # 根据类别出题
     def get_question_by_category(self, category):
-        questions = list(self.database.get_data_by_attr("question", "category", category))
+        questions = list(self.database.get_data_by_attr(
+            "question", "category", category))
         ans = []
         for i in questions:
             ques = q.question(list(i))
@@ -103,8 +105,10 @@ class control():
             count += 1
         return ans
     # 根据书籍id出题
+
     def get_question_by_bookid(self, bookid):
-        questions = list(self.database.get_data_by_attr("question", "bookid", bookid))
+        questions = list(self.database.get_data_by_attr(
+            "question", "bookid", bookid))
         ans = []
         for i in questions:
             ques = q.question(list(i))
@@ -117,7 +121,8 @@ class control():
             i.update({"q_id": count})
             count += 1
         return ans
-    # 改卷 
+    # 改卷
+
     def check(self, info):
 
         print("*************")
@@ -211,6 +216,9 @@ class control():
             return returnvalue
         except:
             return None
+
+
+ctrl = control()
 
 # print(c.get_user_info_by_id(1))
 # print(c.new_user(1, 2, 3, 4, 5))
