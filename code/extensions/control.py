@@ -29,8 +29,10 @@ class control():
         id = random.randint(0, 10000)
         while(id in self.user_id):
             id = random.randint(0, 10000)
-        self.database.Update_user(id, name, gender, tele, pw, brief)
-        return id
+        if self.database.Update_user(id, name, gender, tele, pw, brief):
+            return id
+        else:
+            return -1
 
     # 获取书籍排名，名字，作者
     def get_book_brief_info(self):

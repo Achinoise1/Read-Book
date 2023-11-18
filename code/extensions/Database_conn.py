@@ -75,16 +75,35 @@ class my_sql():
         for i in item:
             values += f'{i},'
         sql = f'insert into `{table_name}` values({values[:-1]});'
+        
+        # before
+        # try:
+        #     cursor.execute(sql)
+        #     conn.commit()
+        # except:
+        #     conn.rollback()
+        #     with open("err.txt", "a", encoding="utf-8")as f:
+        #         f.write(sql+"\n")
+        #     print("error")
+        # cursor.close()
+        # conn.close()
+        
+        # after
         try:
             cursor.execute(sql)
             conn.commit()
+            cursor.close()
+            conn.close()
+            return True
         except:
             conn.rollback()
             with open("err.txt", "a", encoding="utf-8")as f:
                 f.write(sql+"\n")
             print("error")
-        cursor.close()
-        conn.close()
+            cursor.close()
+            conn.close()
+            return False
+        
 
     def get_data(self, table_name):
         conn = pymysql.connect(host=host, user=user, password=password,
@@ -142,7 +161,7 @@ class my_sql():
         item.append(f'"{telephone}"')
         item.append(f'"{password}"')
         item.append(f'"{brief}"')
-        self.Update_table("user", item)
+        return self.Update_table("user", item)
     
     def Update_statistics(self,userid,score,start,end,duration,a1,a2,a3,a4,a5,b1,b2,b3,b4,b5,questionnum,rightnum,wrongnum,emptynum):
         item = []

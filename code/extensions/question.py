@@ -34,6 +34,9 @@ class test():
         self.category.update({"main":[0,0]})
         self.category.update({"content":[0,0]})
         self.category.update({"detail":[0,0]})
+        
+        print("here's the question")
+        print(l['test'])
 
         self.questions={}
 
@@ -53,9 +56,17 @@ class test():
         self.wrong=0
         self.null=0
         self.answer={}
-        for i in l["titleID_choice"]:
-            temp=i.split("_",1)
-            self.answer.update({int(temp[0])+1:temp[1]})
+        
+        # before
+        # for i in l["titleID_choice"]:
+        #     temp=i.split("_",1)
+        #     self.answer.update({int(temp[0])+1:temp[1]})
+        
+        # after
+        for k,v in l["titleID_choice"].items():
+            self.answer.update({int(k)+1:v})
+            
+            
         self.all=len(self.questions)
         for i in self.answer:
             if(self.answer[i]==self.questions[i]):
