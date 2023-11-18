@@ -1,13 +1,18 @@
 from flask import session, request
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 from extensions.control import ctrl
 import time
 
 
 class testSelected(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument(
+            'type', type=str, required=True, location='form')
+
     def post(self):
-        print(session)
-        testType = request.form.get("selected")
+        args = self.parser.parse_args()
+        testType = args.get("type")
         if testType == "random":  # 随机出题测试
             test = ctrl.get_question_random()
         else:  # 指定类型随机出题测试
@@ -15,8 +20,6 @@ class testSelected(Resource):
             if test == []:
                 return {"msg": 400, "detail": "没有该类型题目"}
         try:
-            session['ques'] = test
-            session['starttime'] = int(time.time())
-            return {"msg": 200, "detail": "测试题目准备完成", "data": {"ques": session['ques'], "starttime": session['starttime']}}
+            return {"code": 200, "msg": "测试题目准备完成", "data": {"ques": test, "starttime": int(time.time())}}
         except:
-            return {"msg": 500, "detail": "未初始化"}
+            return {"code": 500, "msg": "未初始化"}

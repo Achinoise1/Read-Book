@@ -3,6 +3,6 @@ from flask_restful import Api
 from web.testSelected.views import testSelected
 
 testSelected_var = Blueprint(
-    'testSelected', __name__, url_prefix='/TestSelected')
+    'testSelected', __name__, url_prefix='/api')
 testSelected_api = Api(testSelected_var)
-testSelected_api.add_resource(testSelected, '/')
+testSelected_api.add_resource(testSelected, '/TestSelected')
