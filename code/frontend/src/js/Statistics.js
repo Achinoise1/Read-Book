@@ -11,7 +11,7 @@ import {
 import { subscribe, justifyTextStyle, getUser } from './utils.js';
 import axios from "axios";
 import '../css/style.css';
-import { Progress, Space } from 'antd';
+import { Progress, Space, Spin } from 'antd';
 import { Radar } from '@antv/g2plot';
 
 function Statistics() {
@@ -309,11 +309,16 @@ function Statistics() {
                                 </div>
                             </div>
                         ) : (
-                            <div className="heading_container heading_center">
-                                <h2>
-                                    您还没有进行过任何测试，请先进行<a href='/test'>测试</a>，或返回<a href='/'>主页</a>
-                                </h2>
-                            </div>
+                            (isLoaded === true) ? (
+                                <div className="heading_container heading_center">
+                                    <h2>
+                                        您还没有进行过任何测试，请先进行<a href='/test'>测试</a>，或返回<a href='/'>主页</a>
+                                    </h2>
+                                </div>
+                            ) : (
+                                <Spin />
+                            )
+
                         )}
 
                     </div>)}
