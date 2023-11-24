@@ -32,13 +32,9 @@ function Home() {
     const [data, setData] = useState({});
 
     useEffect(() => {
-
-        axios.post('/api') // 替换为你的后端API URL
-            .catch(error => {
-                console.log(error)
-            });
-        axios.get('/api/Home') // 替换为你的后端API URL
+        axios.get('/api') // 替换为你的后端API URL
             .then(response => {
+                console.log(response);
                 setData(response.data);
             })
             .catch(error => {

@@ -3,7 +3,7 @@ from flask_restful import Resource
 
 
 class PreProcessing(Resource):
-    def post(self):
+    def get(self):
         try:
             session.clear()
             # register--0|login--1|info--2

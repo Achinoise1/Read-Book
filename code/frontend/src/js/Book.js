@@ -67,6 +67,8 @@ function Book() {
     //     });
     // };
 
+    // console.log(data);
+
     if (data === null) {
         return <Spin />;
     }
