@@ -13,7 +13,7 @@ import { faFacebook, faGithub, faQq } from '@fortawesome/fontawesome-free-brands
 import axios from 'axios';
 import { subscribe, justifyTextStyle, LeftTextStyle, saveUser, ERROR, goBack, ItemCenter } from '../utils.js';
 import { Form, Button, Image, Input, Space, Select } from 'antd';
-import { AsteriskOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
     inputCounts: {},
@@ -125,11 +125,12 @@ function LoginRegister() {
 
     //如果成功获取到了数据，存储并跳转回上一个页面
     //loginRes改变了意味着获取到了数据，因此可以跳转
+    const navigate = useNavigate();
     useEffect(() => {
         console.log(loginRes)
         if (loginRes) {
             saveUser(loginRes.data);
-            goBack();
+            navigate(-1);
         }
     }, [loginRes])
 

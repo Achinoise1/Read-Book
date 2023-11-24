@@ -75,3 +75,7 @@ export const ERROR = {
     2003: '该用户已存在',
     2004: '手机号无效'
 }
+
+export function toLogin(navigate) {
+    navigate('/login')
+}

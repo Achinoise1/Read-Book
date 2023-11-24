@@ -19,7 +19,7 @@ import cat4 from '../figures/cat4.png';
 import cat5 from '../figures/cat5.png';
 import cat6 from '../figures/cat6.png';
 import { useNavigate } from 'react-router-dom';
-import { subscribe, justifyTextStyle, getUser } from './utils.js';
+import { subscribe, justifyTextStyle, getUser, toLogin } from './utils.js';
 
 
 function Test() {
@@ -153,7 +153,7 @@ function Test() {
                         <div className="container ">
                             <div className="heading_container heading_center">
                                 <h1>
-                                    <b>请先<a href='/login'>登录</a></b>
+                                    <b>请先<a onClick={() => toLogin(navigate)}>登录</a></b>
                                 </h1>
                                 <p style={{ fontSize: "24px" }}>
                                     登录后即可进行测试

@@ -8,15 +8,17 @@ import {
     faFacebook,
     faGithub, faQq
 } from '@fortawesome/fontawesome-free-brands'
-import { subscribe, justifyTextStyle, getUser } from './utils.js';
+import { subscribe, justifyTextStyle, getUser, toLogin } from './utils.js';
 import axios from "axios";
 import '../css/style.css';
 import { Progress, Space, Spin } from 'antd';
 import { Radar } from '@antv/g2plot';
+import { useNavigate } from "react-router-dom";
 
 function Statistics() {
     const [res, setRes] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (typeof getUser() != 'object' || Object.keys(getUser()).length != 0) {
@@ -132,7 +134,7 @@ function Statistics() {
                     <div className="container ">
                         <div className="heading_container heading_center">
                             <h1>
-                                <b>请先<a href='/login'>登录</a></b>
+                                <b>请先<a onClick={() => toLogin(navigate)}>登录</a></b>
                             </h1>
                             <p style={{ fontSize: "24px" }}>
                                 登录后即可查看结果
@@ -141,10 +143,6 @@ function Statistics() {
                     </div>
                 ) : (
                     <div className="container">
-
-
-
-
 
                         {(res != undefined && Object.keys(res).length > 0) ? (
                             <div>
@@ -316,9 +314,13 @@ function Statistics() {
                                     </h2>
                                 </div>
                             ) : (
-                                <Spin />
-                            )
+                                <div className="container ">
+                                    <div className="heading_container heading_center">
+                                        <Spin />
+                                    </div>
+                                </div>
 
+                            )
                         )}
 
                     </div>)}
